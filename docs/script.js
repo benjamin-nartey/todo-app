@@ -27,19 +27,21 @@ function renderList(lists = []) {
       (list, i) =>
         `
       <li>
-        <input type="checkbox" ${list.isChecked ? "checked" : ""} id=${i}  />
+        <input onclick ='checkItem(${i})' type="checkbox" ${
+          list.isChecked ? "checked" : ""
+        } id=${i}  />
         <label for=${i}><span>${list.text}</span></label>
-        <button class="delete" id =${i}>x</button>
+        <button onclick ='deleteItem(${i})' class="delete" id =${i}>x</button>
       </li>
     `
     )
     .join("");
 }
 
-function deleteItem(event) {
-  if (!event.target.matches("button")) return;
+function deleteItem(index) {
+  // if (!event.target.matches("button")) return;
 
-  const index = event.target.id;
+  // const index = event.target.id;
   const storeCopy = [...store];
   storeCopy.splice(index, 1); //[1,2,4,5,6]
   store = storeCopy;
@@ -47,10 +49,10 @@ function deleteItem(event) {
   renderList(storeCopy);
 }
 
-function checkItem(event) {
-  if (!event.target.matches("input")) return;
+function checkItem(index) {
+  // if (!event.target.matches("input")) return;
 
-  const index = event.target.id;
+  // const index = event.target.id;
   const storeCopy = [...store];
 
   storeCopy[index].isChecked = !storeCopy[index].isChecked;
@@ -62,6 +64,6 @@ function checkItem(event) {
 
 renderList(store);
 
-itemList.addEventListener("click", deleteItem);
-itemList.addEventListener("click", checkItem);
+// itemList.addEventListener("click", deleteItem);
+// itemList.addEventListener("click", checkItem);
 addItems.addEventListener("submit", AddToList);
